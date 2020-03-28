@@ -205,4 +205,13 @@ fabric.properties
 # Android studio 3.1+ serialized cache file
 .idea/caches/build_file_checksums.ser
 
+
+### Database ###
+*.accdb
+*.db
+*.dbf
+*.mdb
+*.pdb
+*.sqlite3
+
 # End of https://www.gitignore.io/api/node,rider,angular
