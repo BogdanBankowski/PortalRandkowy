@@ -216,9 +216,9 @@ fabric.properties
 
 
 
-bin
-obj
-.idea
+bin/
+obj/
+.idea/
 
 
 
