@@ -214,4 +214,12 @@ fabric.properties
 *.pdb
 *.sqlite3
 
+
+
+bin
+obj
+.idea
+
+
+
 # End of https://www.gitignore.io/api/node,rider,angular
