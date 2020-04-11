@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using PortalRandkowy.API.Data;
 
@@ -20,46 +21,46 @@ namespace PortalRandkowy.API.Controllers
         }
 
         [HttpGet]
-        public IActionResult GetValues()
+        public async Task<IActionResult> GetValues()
         {
-            var result = context.Values.ToList();
+            var result = await context.Values.ToListAsync();
             return Ok(result);
         }
 
         [HttpGet("{id}")]
-        public IActionResult GetValue(int id)
+        public async Task<IActionResult> GetValue(int id)
         {
-            var result = context.Values.FirstOrDefault(x => x.Id == id);
+            var result = await context.Values.FirstOrDefaultAsync(x => x.Id == id);
             return Ok(result);
         }
 
         [HttpPost]
-        public void AddValue([FromBody]Value value)
+        public async Task AddValue([FromBody]Value value)
         {
             context.Add(value);
-            context.SaveChanges();
+            await context.SaveChangesAsync();
         }
 
         [HttpPut("{id}")]
-        public void EditValue(int id, [FromBody] Value value)
+        public async Task EditValue(int id, [FromBody] Value value)
         {
-            var valueToModify = context.Values.FirstOrDefault(x => x.Id == id);
+            var valueToModify = await context.Values.FirstOrDefaultAsync(x => x.Id == id);
             if (valueToModify != null)
             {
                 valueToModify.Name = value.Name;
-                context.SaveChanges();
+                await context.SaveChangesAsync();
             }
             
         }
 
         [HttpDelete("{id}")]
-        public void DeleteValue(int id)
+        public async Task DeleteValue(int id)
         {
-            var valueToDelete = context.Values.FirstOrDefault((x => x.Id == id));
+            var valueToDelete = await context.Values.FirstOrDefaultAsync((x => x.Id == id));
             if (valueToDelete != null)
             {
                 context.Remove(valueToDelete);
-                context.SaveChanges();
+                await context.SaveChangesAsync();
             }
         }
     }
