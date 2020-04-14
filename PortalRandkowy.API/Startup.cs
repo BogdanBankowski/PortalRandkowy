@@ -29,6 +29,7 @@ namespace PortalRandkowy.API
         {
             services.AddDbContext<DataContext>(db => db.UseNpgsql(Configuration.GetConnectionString("DefaultConnection")));
             services.AddControllers();
+            services.AddCors();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -39,7 +40,8 @@ namespace PortalRandkowy.API
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseHttpsRedirection();
+             
+            app.UseCors(x => x.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin());
 
             app.UseRouting();
 
